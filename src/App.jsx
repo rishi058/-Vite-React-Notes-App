@@ -1,14 +1,21 @@
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadAll } from "@tsparticles/all"; // if you are going to use `loadAll`, install the "@tsparticles/all" package too.
-import Home from "./pages/homePage/Home";
-import LoginPage from "./pages/login/LoginPage";
-import RegisterPage from "./pages/register/RegisterPage";
+import {RouterProvider} from 'react-router-dom'
+import router from "./routes";
 
 function App() {
   const [init, setInit] = useState(false);
+  const [token, setToken] = useState('');
+
 
   useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+
+
     initParticlesEngine(async (engine) => {
       await loadAll(engine);
     }).then(() => {
@@ -99,9 +106,7 @@ function App() {
           particlesLoaded={particlesLoaded}
           options={options}
         />
-        <LoginPage/>
-        {/* <RegisterPage/> */}
-        {/* <Home/> */}
+         <RouterProvider router={router}/>
       </>
     );
   }

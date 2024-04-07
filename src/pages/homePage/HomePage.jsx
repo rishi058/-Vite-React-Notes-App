@@ -5,7 +5,7 @@ import notesList from "../../models/note_model";
 import AddNoteDialogBox from "../../components/homePage/AddNoteDialogBox";
 import EditNoteDialogBox from "../../components/homePage/EditNoteDialogBox";
 
-function Home() {
+function HomePage() {
   const [isAddNoteDialogOpen, setIsAddNoteDialogOpen] = useState(false);
   const [isEditNoteDialogOpen, setIsEditNoteDialogOpen] = useState(false);
   const [selectedIndex, changeIndex] = useState(0);
@@ -63,4 +63,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
