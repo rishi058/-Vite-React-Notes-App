@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadAll } from "@tsparticles/all"; // if you are going to use `loadAll`, install the "@tsparticles/all" package too.
+import Home from "./pages/homePage/Home";
+import LoginPage from "./pages/login/LoginPage";
+import RegisterPage from "./pages/register/RegisterPage";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -16,11 +19,6 @@ function App() {
   const particlesLoaded = (container) => {
     console.log(container);
   };
-
-  //-----------------------------------------------------------
-
-
-  //-----------------------------------------------------------
 
   const options = useMemo(
     () => ({
@@ -101,6 +99,9 @@ function App() {
           particlesLoaded={particlesLoaded}
           options={options}
         />
+        <LoginPage/>
+        {/* <RegisterPage/> */}
+        {/* <Home/> */}
       </>
     );
   }
