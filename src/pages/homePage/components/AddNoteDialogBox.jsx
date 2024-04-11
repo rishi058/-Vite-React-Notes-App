@@ -1,46 +1,37 @@
-import React, { useState } from 'react';
-import Notes from "../../services/notes_manipulation";
-import { showErrorToast } from "../toast";
+import React, { useState } from "react";
+import { showErrorToast } from "../../../components/toast";
 
-const EditNoteDialogBox = ({ isOpen, onClose, note, saveItem, deleteItem}) => {
-  if (!isOpen || !note) return null;
+import Notes from "../../../services/notes_api";
 
-  const [title, setTitle] = useState(note.title);
-  const [content, setContent] = useState(note.content);
+const AddNoteDialogBox = ({ isOpen, onClose, addItem }) => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-  async function updateNoteToDB() {
+  if (!isOpen) return null;
+
+
+  async function addNoteToDB() {
     if (title === "" && content === "") {
       showErrorToast("Note should not be empty");
       return;
     }
-
-    note.title = title;
-    note.content = content;
-
-    await new Notes().updateNote(note).then((ok) => {
-      if (ok) {
-        saveItem(note);
+    await new Notes().addNote(title, content).then((note) => {
+      if (note!="") {
+        addItem(note);
         onClose();
       }
     });
   }
-
-  async function deleteNoteToDB() {
-    await new Notes().deleteNote(note._id).then((ok) => {
-      if (ok) {
-        deleteItem(note);
-        onClose();
-      }
-    });
-  }
-
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen">
         <div className="bg-white/20 w-[80vw] backdrop-blur-md p-8 rounded shadow-xl md:w-[600px] ">
           <div className="mb-4">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700"
+            >
               Title
             </label>
             <input
@@ -53,7 +44,10 @@ const EditNoteDialogBox = ({ isOpen, onClose, note, saveItem, deleteItem}) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium text-gray-700"
+            >
               Content
             </label>
             <textarea
@@ -65,17 +59,8 @@ const EditNoteDialogBox = ({ isOpen, onClose, note, saveItem, deleteItem}) => {
               onChange={(e) => setContent(e.target.value)}
             />
           </div>
-
-          <div className='flex justify-between'>
-          <button
-              className="bg-red-500/80 hover:bg-red-500/100 text-white px-4 py-2 rounded-md mr-2"
-              onClick={deleteNoteToDB}
-            >
-              Delete
-            </button>
-
-            <div className="text-right">
-          <button
+          <div className="text-right">
+            <button
               className="bg-slate-600/70 hover:bg-slate-600 text-white px-4 py-2 rounded-md mr-2"
               onClick={() => {
                 onClose(); // Close the dialog box
@@ -86,17 +71,26 @@ const EditNoteDialogBox = ({ isOpen, onClose, note, saveItem, deleteItem}) => {
 
             <button
               className="bg-slate-600/70 hover:bg-slate-600 text-white px-4 py-2 rounded-md"
-              onClick={updateNoteToDB}
+              onClick={addNoteToDB}
             >
               Save
             </button>
           </div>
-          </div>
-
         </div>
       </div>
     </div>
   );
 };
 
-export default EditNoteDialogBox;
+export default AddNoteDialogBox;
+
+function getRandomId(length) {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    result += chars.charAt(randomIndex);
+  }
+  return result;
+}

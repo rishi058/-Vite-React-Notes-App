@@ -2,7 +2,7 @@ import {React, useState} from 'react'
 import { CiLogout, CiSearch } from "react-icons/ci";
 import { IoMdAdd } from "react-icons/io";
 import { Navigate } from "react-router-dom";
-import { showToast } from '../toast';
+import { showToast } from '../../../components/toast';
 
 function NavBar({username, openDialog }) {
 

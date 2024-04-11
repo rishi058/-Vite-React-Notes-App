@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Navigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Auth from '../../services/auth/auth';
+import Auth from "../../services/auth_api";
 
 
 function LoginPage() {

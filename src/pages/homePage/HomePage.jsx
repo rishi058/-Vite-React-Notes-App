@@ -1,12 +1,14 @@
 import {useState, useEffect} from "react";
-import NavBar from "../../components/homePage/NavBar";
-import CardGrid from "../../components/homePage/CardGrid";
-import AddNoteDialogBox from "../../components/homePage/AddNoteDialogBox";
-import EditNoteDialogBox from "../../components/homePage/EditNoteDialogBox";
 import { useNavigate } from 'react-router-dom';
-import Notes from "../../services/notes_manipulation";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import NavBar from "./components/NavBar";
+import CardGrid from "./components/CardGrid";
+import AddNoteDialogBox from "./components/AddNoteDialogBox";
+import EditNoteDialogBox from "./components/EditNoteDialogBox";
+import Notes from "../../services/notes_api";
+
 
 
 const isLoggedIn = () => {
