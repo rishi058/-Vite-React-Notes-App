@@ -1,18 +1,36 @@
-import React, { useState } from 'react';
-import { Notes } from '../../models/note_model';
+import React, { useState } from "react";
+import Notes  from "../../services/notes_manipulation";
+import { showErrorToast } from "../toast";
 
 const AddNoteDialogBox = ({ isOpen, onClose, addItem }) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   if (!isOpen) return null;
+
+
+  async function addNoteToDB() {
+    if (title === "" && content === "") {
+      showErrorToast("Note should not be empty");
+      return;
+    }
+    await new Notes().addNote(title, content).then((note) => {
+      if (note!="") {
+        addItem(note);
+        onClose();
+      }
+    });
+  }
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen">
         <div className="bg-white/20 w-[80vw] backdrop-blur-md p-8 rounded shadow-xl md:w-[600px] ">
           <div className="mb-4">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700"
+            >
               Title
             </label>
             <input
@@ -25,7 +43,10 @@ const AddNoteDialogBox = ({ isOpen, onClose, addItem }) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium text-gray-700"
+            >
               Content
             </label>
             <textarea
@@ -38,8 +59,8 @@ const AddNoteDialogBox = ({ isOpen, onClose, addItem }) => {
             />
           </div>
           <div className="text-right">
-          <button
-              className="bg-orange-500/50 hover:bg-orange-500/70 text-white px-4 py-2 rounded-md mr-2"
+            <button
+              className="bg-slate-600/70 hover:bg-slate-600 text-white px-4 py-2 rounded-md mr-2"
               onClick={() => {
                 onClose(); // Close the dialog box
               }}
@@ -48,16 +69,8 @@ const AddNoteDialogBox = ({ isOpen, onClose, addItem }) => {
             </button>
 
             <button
-              className="bg-orange-500/50 hover:bg-orange-500/70 text-white px-4 py-2 rounded-md"
-              onClick={() => {
-                if(title==='' && content===''){
-                  alert("Note should not be empty");
-                  return;}
-                const item = new Notes(getRandomId(7), title, content, "");
-                addItem(item);
-                console.log('Title:', title, 'Content:', content);
-                onClose(); // Close the dialog box
-              }}
+              className="bg-slate-600/70 hover:bg-slate-600 text-white px-4 py-2 rounded-md"
+              onClick={addNoteToDB}
             >
               Save
             </button>
@@ -70,11 +83,10 @@ const AddNoteDialogBox = ({ isOpen, onClose, addItem }) => {
 
 export default AddNoteDialogBox;
 
-
-
 function getRandomId(length) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * chars.length);
     result += chars.charAt(randomIndex);

@@ -1,11 +1,47 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import NavBar from "../../components/homePage/NavBar";
 import CardGrid from "../../components/homePage/CardGrid";
-import notesList from "../../models/note_model";
 import AddNoteDialogBox from "../../components/homePage/AddNoteDialogBox";
 import EditNoteDialogBox from "../../components/homePage/EditNoteDialogBox";
+import { useNavigate } from 'react-router-dom';
+import Notes from "../../services/notes_manipulation";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+const isLoggedIn = () => {
+  const token = localStorage.getItem('token');
+  console.log(token);
+  return token && token !== "" ? true : false; // Ensure we properly check for non-empty token
+};
 
 function HomePage() {
+
+  const navigate = useNavigate();
+
+  const [notesList, setMyNotes] = useState([]);
+  const [username, setUsername] = useState("");
+
+  async function getNotes() {
+    const response = await new Notes().getNotes();
+    if(response!=''){
+      setMyNotes(response.data);
+      console.log(response.data);
+      setUsername(response.username);
+    }
+  }
+
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      navigate("/login");
+    }
+    else{
+      getNotes();
+    }
+  }, [navigate]);
+
+
+
   const [isAddNoteDialogOpen, setIsAddNoteDialogOpen] = useState(false);
   const [isEditNoteDialogOpen, setIsEditNoteDialogOpen] = useState(false);
   const [selectedIndex, changeIndex] = useState(0);
@@ -21,7 +57,7 @@ function HomePage() {
     notesList.push(new_item);
   }
 
-  function saveItem(item){
+  function updateItem(item){
     for(let i=0; i<notesList.length; i++){
       if(notesList[i].id==item.id){
         notesList[i].title = item.title;
@@ -52,13 +88,14 @@ function HomePage() {
   return (
     <>
     <br />
-    <NavBar openDialog={openAddDialog} />
+    <NavBar username={username} openDialog={openAddDialog} />
     <br />
     <div className="w-[95vw] mx-auto flex justify-center xl:w-[1200px]">
       <CardGrid notes={notesList} openEditDilaog={openEditDialog} />
       <AddNoteDialogBox isOpen={isAddNoteDialogOpen} onClose={closeAddDialog} addItem={addItem}/>
-      <EditNoteDialogBox isOpen={isEditNoteDialogOpen} onClose={closeEditDialog} notes={notesList[selectedIndex]} saveItem={saveItem} deleteItem={deleteItem}/>
+      <EditNoteDialogBox isOpen={isEditNoteDialogOpen} onClose={closeEditDialog} note={notesList[selectedIndex]} saveItem={updateItem} deleteItem={deleteItem}/>
     </div>
+    <ToastContainer />
   </>
   );
 }

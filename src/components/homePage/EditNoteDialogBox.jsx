@@ -1,10 +1,38 @@
 import React, { useState } from 'react';
+import Notes from "../../services/notes_manipulation";
+import { showErrorToast } from "../toast";
 
-const EditNoteDialogBox = ({ isOpen, onClose, notes, saveItem, deleteItem}) => {
-  if (!isOpen) return null;
+const EditNoteDialogBox = ({ isOpen, onClose, note, saveItem, deleteItem}) => {
+  if (!isOpen || !note) return null;
 
-  const [title, setTitle] = useState(notes.title);
-  const [content, setContent] = useState(notes.content);
+  const [title, setTitle] = useState(note.title);
+  const [content, setContent] = useState(note.content);
+
+  async function updateNoteToDB() {
+    if (title === "" && content === "") {
+      showErrorToast("Note should not be empty");
+      return;
+    }
+
+    note.title = title;
+    note.content = content;
+
+    await new Notes().updateNote(note).then((ok) => {
+      if (ok) {
+        saveItem(note);
+        onClose();
+      }
+    });
+  }
+
+  async function deleteNoteToDB() {
+    await new Notes().deleteNote(note._id).then((ok) => {
+      if (ok) {
+        deleteItem(note);
+        onClose();
+      }
+    });
+  }
 
 
   return (
@@ -41,17 +69,14 @@ const EditNoteDialogBox = ({ isOpen, onClose, notes, saveItem, deleteItem}) => {
           <div className='flex justify-between'>
           <button
               className="bg-red-500/80 hover:bg-red-500/100 text-white px-4 py-2 rounded-md mr-2"
-              onClick={() => {
-                deleteItem(notes);
-                onClose(); // Close the dialog box
-              }}
+              onClick={deleteNoteToDB}
             >
               Delete
             </button>
 
             <div className="text-right">
           <button
-              className="bg-orange-500/50 hover:bg-orange-500/70 text-white px-4 py-2 rounded-md mr-2"
+              className="bg-slate-600/70 hover:bg-slate-600 text-white px-4 py-2 rounded-md mr-2"
               onClick={() => {
                 onClose(); // Close the dialog box
               }}
@@ -60,17 +85,8 @@ const EditNoteDialogBox = ({ isOpen, onClose, notes, saveItem, deleteItem}) => {
             </button>
 
             <button
-              className="bg-orange-500/50 hover:bg-orange-500/70 text-white px-4 py-2 rounded-md"
-              onClick={() => {
-                if(notes.title==='' && notes.content===''){
-                  alert("Note should not be empty");
-                  return;
-                }
-                notes.title = title;
-                notes.content = content;
-                saveItem(notes);
-                onClose(); // Close the dialog box
-              }}
+              className="bg-slate-600/70 hover:bg-slate-600 text-white px-4 py-2 rounded-md"
+              onClick={updateNoteToDB}
             >
               Save
             </button>

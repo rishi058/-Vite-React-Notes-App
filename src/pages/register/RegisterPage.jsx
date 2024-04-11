@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; 
+import { Navigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Auth from '../../services/auth/auth';
 
 function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [goto, setGoto] = useState(false);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) =>  {
     e.preventDefault();
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Add your registration logic here
+    const success = await new Auth().register(name, email, password);
+    if(success){
+      setGoto(true);
+    }
   };
+
+  if(goto){
+    return <Navigate to="/" replace={true}/>;
+  }
 
   return (
     <div className="min-h-screen items-center justify-center flex flex-col mx-2">
@@ -47,9 +56,10 @@ function RegisterPage() {
           </div>
         </form>
         <div className="mt-4 text-sm">
-          <p>Already have an account? <a href="#" className="font-bold text-black/50 hover:text-black/100">Login here</a></p>
+          <p>Already have an account? <a href="/login" className="font-bold text-black/50 hover:text-black/100">Login here</a></p>
         </div>
       </div>
+    <ToastContainer />
     </div>
   );
 }
