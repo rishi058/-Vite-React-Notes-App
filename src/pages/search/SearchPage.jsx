@@ -64,22 +64,23 @@ function SearchPage() {
       <button className="bg-slate-600/70  text-white px-4 py-2 hover:bg-slate-600 rounded-md mr-4" onClick={handleGoBack}>
       <IoMdArrowRoundBack size={20} />
       </button>
-      <div className="w-full border-1 h-10 md:mx-8 lg:mx-20 xl:mx-28 backdrop-blur-xl bg-white/10 rounded-md flex justify-center items-center">
+      <div className="w-full border-1 h-10 md:mx-8 lg:mx-20 xl:mx-28 bg-white/20 rounded-md flex justify-center items-center ">
       <input
               id="title"
               type="text"
-              className="w-full rounded-md px-2 py-1"
+              placeholder="Search Notes..."
+              className="w-full rounded-md px-2 py-1 focus:outline-none placeholder:text-white/50 bg-transparent"
               value={searchText}
               onChange={(e) => {setSearchText(e.target.value); performQuery();}}
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0)",
-                outline: "none",
-                border: "none",
-                ":focus": {
-                  outline: "none",
-                  border: "none",
-                },
-              }}
+              // style={{
+              //   backgroundColor: "rgba(255, 255, 255, 0)",
+              //   outline: "none",
+              //   border: "none",
+              //   ":focus": {
+              //     outline: "none",
+              //     border: "none",
+              //   },
+              // }}
             />
             <FaSearch size={20} style={{color:'white'}}/>
             <div className="w-2"></div>
