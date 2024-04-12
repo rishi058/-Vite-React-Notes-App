@@ -37,10 +37,19 @@ const AddNoteDialogBox = ({ isOpen, onClose, addItem }) => {
             <input
               id="title"
               type="text"
-              className="mt-1 p-2 block w-full border-gray-300 rounded-md"
-              placeholder="Enter title"
+              className="mt-1 p-2 block w-full rounded-md"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              style={{
+                backdropFilter: "blur(10px)",
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                outline: "none",
+                border: "none",
+                ":focus": {
+                  outline: "none",
+                  border: "none",
+                },
+              }}
             />
           </div>
           <div className="mb-4">
@@ -52,11 +61,20 @@ const AddNoteDialogBox = ({ isOpen, onClose, addItem }) => {
             </label>
             <textarea
               id="content"
-              className="mt-1 p-2 block w-full border-gray-300 rounded-md"
+              className="mt-1 p-2 block w-full rounded-md"
               rows="8"
-              placeholder="Enter content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
+              style={{
+                backdropFilter: "blur(10px)",
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                outline: "none",
+                border: "none",
+                ":focus": {
+                  outline: "none",
+                  border: "none",
+                },
+              }}
             />
           </div>
           <div className="text-right">

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; 
 import { Navigate } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import Auth from "../../services/auth_api";
 
 
@@ -55,7 +55,7 @@ function LoginPage() {
           <p>Doesn't have an account? <a href="/register" className="font-bold text-black/50 hover:text-black/100" >Register here</a></p>
         </div>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       </div>
   );
 }

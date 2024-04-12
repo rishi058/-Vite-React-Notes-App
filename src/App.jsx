@@ -4,6 +4,9 @@ import { loadAll } from "@tsparticles/all"; // if you are going to use `loadAll`
 import { RouterProvider } from "react-router-dom";
 import router from "./routes";
 import bg_option from "./bg_option";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   const [init, setInit] = useState(false);
@@ -30,8 +33,8 @@ function App() {
           particlesLoaded={particlesLoaded}
           options={options}
         />
-
         <RouterProvider router={router} />
+        <ToastContainer/>
       </>
     );
   }
