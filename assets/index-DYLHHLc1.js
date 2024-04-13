@@ -1,0 +1,1 @@
+import{b as a}from"./index-B5p0OL-A.js";async function o(){a("ease-in-cubic",i=>i**3),a("ease-out-cubic",i=>1-(1-i)**3),a("ease-in-out-cubic",i=>i<.5?4*i**3:1-(-2*i+2)**3/2),await Promise.resolve()}export{o as loadEasingCubicPlugin};
