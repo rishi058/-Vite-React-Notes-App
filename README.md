@@ -9,8 +9,7 @@ This is a notes app built using Vite and React. The objective of this project is
 - Scalable Directory Structure
 - Modular Coding Style
 
-### Repo of Note's App backend 
-    [click to view][https://github.com/rishi058/-Vite-React-Notes-App-Backend]
+### Repo of Note's App backend [click to view](https://github.com/rishi058/-Vite-React-Notes-App-Backend)
 
 ## Table of Contents
 
