@@ -1,17 +1,18 @@
 import React from "react";
 import Card from "./Card";
 
-function CardGrid({ notes, openEditDilaog }) {
+function CardGrid({ notes, openEditDialog }) {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-2">
       {notes.map((note, index) => (
-        <Card
+        <div
           key={index}
-          title={note.title}
-          content={note.content}
-          index={index}
-          openDialog={openEditDilaog}
-        />
+          onClick={() => {
+            openEditDialog(index);
+          }}
+        >
+          <Card title={note.title} content={note.content} />
+        </div>
       ))}
     </div>
   );

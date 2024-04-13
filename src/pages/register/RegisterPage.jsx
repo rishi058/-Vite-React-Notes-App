@@ -11,6 +11,7 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [goto, setGoto] = useState(false);
+  const [gotoLogin, setGotoLogin] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -22,6 +23,9 @@ function RegisterPage() {
 
   if (goto) {
     return <Navigate to="/" replace={true} />;
+  }
+  if(gotoLogin){
+    return <Navigate to="/login" replace={true} />;
   }
 
   return (
@@ -109,15 +113,15 @@ function RegisterPage() {
           </div>
         </form>
         <div className="mt-4 text-sm">
-          <p>
-            Already have an account?{" "}
-            <a
-              href="/login"
-              className="font-bold text-black/50 hover:text-black/100"
+          <div className="flex">
+            Already have an account?
+            <div
+              onClick={() => setGotoLogin(true)}
+              className="font-bold text-black/50 hover:text-black/100 ml-2"
             >
               Login here
-            </a>
-          </p>
+            </div>
+          </div>
         </div>
       </div>
       <ToastContainer />

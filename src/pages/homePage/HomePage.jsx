@@ -73,7 +73,7 @@ function HomePage() {
     }
   }
 
-  const openEditDialog = (index) => {
+  function openEditDialog(index){
     changeIndex(index);
     setIsEditNoteDialogOpen(true);
   };

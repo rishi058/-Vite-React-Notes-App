@@ -60,7 +60,7 @@ function SearchPage() {
   return (
     <div>
       <br />
-      <div className="w-[95vw] mx-auto bg-white/10 backdrop-blur-3xl rounded-md flex justify-between items-center p-4 xl:w-[1200px] ">
+      <div className="w-[95vw] mx-auto bg-white/10 backdrop-blur-md rounded-md flex justify-between items-center p-4 xl:w-[1200px] ">
       <button className="bg-slate-600/70  text-white px-4 py-2 hover:bg-slate-600 rounded-md mr-4" onClick={handleGoBack}>
       <IoMdArrowRoundBack size={20} />
       </button>
@@ -72,15 +72,6 @@ function SearchPage() {
               className="w-full rounded-md px-2 py-1 focus:outline-none placeholder:text-white/50 bg-transparent"
               value={searchText}
               onChange={(e) => {setSearchText(e.target.value); performQuery();}}
-              // style={{
-              //   backgroundColor: "rgba(255, 255, 255, 0)",
-              //   outline: "none",
-              //   border: "none",
-              //   ":focus": {
-              //     outline: "none",
-              //     border: "none",
-              //   },
-              // }}
             />
             <FaSearch size={20} style={{color:'white'}}/>
             <div className="w-2"></div>

@@ -18,7 +18,7 @@ function NavBar({username, gotoSearch, openDialog }) {
     return <Navigate to="/login" replace={true}/>;
   }
     return (
-        <div className="w-[95vw] mx-auto bg-white/10 backdrop-blur-3xl rounded-md flex justify-between items-center p-4 xl:w-[1200px] ">
+        <div className="w-[95vw] mx-auto bg-white/10 backdrop-blur-sm rounded-md flex justify-between items-center p-4 xl:w-[1200px] ">
           <div>
           <button className="bg-slate-600/70  text-white px-4 py-2 hover:bg-slate-600 rounded-md mr-4" onClick={logout}>
           <CiLogout size={20}/>
