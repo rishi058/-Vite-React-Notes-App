@@ -1,0 +1,1 @@
+import{_ as e}from"./index-CKF4anYh.js";class o{constructor(t){this.id="export-json",this._engine=t}async getPlugin(t){const{ExportJSONInstance:n}=await e(()=>import("./ExportJSONInstance-BectY4fs.js"),[]);return new n(t,this._engine)}loadOptions(){}needsPlugin(){return!0}}export{o as ExportJSONPlugin};

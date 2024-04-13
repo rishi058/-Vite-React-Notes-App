@@ -1,0 +1,1 @@
+import{b as a}from"./index-CKF4anYh.js";async function r(){a("ease-in-circ",t=>1-Math.sqrt(1-t**2)),a("ease-out-circ",t=>Math.sqrt(1-(t-1)**2)),a("ease-in-out-circ",t=>t<.5?(1-Math.sqrt(1-(2*t)**2))/2:(Math.sqrt(1-(-2*t+2)**2)+1)/2),await Promise.resolve()}export{r as loadEasingCircPlugin};

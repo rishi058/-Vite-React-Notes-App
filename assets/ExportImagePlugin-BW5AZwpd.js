@@ -1,1 +1,0 @@
-import{_ as n}from"./index-B5p0OL-A.js";class o{constructor(t){this.id="export-image",this._engine=t}async getPlugin(t){const{ExportImageInstance:e}=await n(()=>import("./ExportImageInstance-omIs5e7V.js"),[]);return new e(t,this._engine)}loadOptions(){}needsPlugin(){return!0}}export{o as ExportImagePlugin};
