@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { showErrorToast } from "../../../components/toast";
 
 import Notes from "../../../services/notes_api";
 
 const EditNoteDialogBox = ({ isOpen, onClose, note, saveItem, deleteItem }) => {
-  if (!isOpen || !note) return null;
+  if (!isOpen || !note) return null;            // it should always on top , to avoid bugs 
 
   const [title, setTitle] = useState(note.title);
   const [content, setContent] = useState(note.content);

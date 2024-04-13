@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { showErrorToast } from "../../../components/toast";
 
 import Notes from "../../../services/notes_api";
 
 const AddNoteDialogBox = ({ isOpen, onClose, addItem }) => {
+  if (!isOpen) return null;           // it should always on top , to avoid bugs 
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
-  if (!isOpen) return null;
-
 
   async function addNoteToDB() {
     if (title === "" && content === "") {

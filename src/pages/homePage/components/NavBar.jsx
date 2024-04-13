@@ -1,11 +1,10 @@
 import {React, useState} from 'react'
 import { CiLogout, CiSearch } from "react-icons/ci";
 import { IoMdAdd } from "react-icons/io";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { showToast } from '../../../components/toast';
 
 function NavBar({username, gotoSearch, openDialog }) {
-  const navigate = useNavigate();
   const [gotoLogin, setGotoLogin] = useState(false);
 
   const logout = () => {
@@ -29,7 +28,7 @@ function NavBar({username, gotoSearch, openDialog }) {
           <button className="bg-slate-600/70  text-white px-4 py-2 hover:bg-slate-600 rounded-md mr-4" onClick={()=>{gotoSearch(true);}}>
           <CiSearch size={20} />
           </button>
-          <button className="bg-slate-600/70  text-white px-4 py-2 hover:bg-slate-600 rounded-md" onClick={openDialog}>
+          <button className="bg-slate-600/70  text-white px-4 py-2 hover:bg-slate-600 rounded-md" onClick={()=>{openDialog();}}>
           <IoMdAdd size={20}/>
           </button>
           </div>
