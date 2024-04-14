@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@freeloop/tailwindcss-backgrounds": "^0.1.3",
-    "@tsparticles/all": "^3.3.0",
+    "@tsparticles/slim": "^3.3.0",
     "@tsparticles/react": "^3.0.0",
     "axios": "^1.6.8",
     "react": "^18.2.0",

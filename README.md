@@ -45,3 +45,7 @@ The following technologies and libraries were used in this project:
 ![Screenshot 2024-04-13 124634](https://github.com/rishi058/-Vite-React-Notes-App/assets/97884033/469e0689-d7ec-4dae-8bd6-a0ce0a742cac)
 
 Feel free to explore the project and make any modifications as needed.
+Features which can be added :-
+ - Pin a Note to the top.
+ - Display the date of notes.
+ - Added a warning-dialog before Logout & Delete function.
