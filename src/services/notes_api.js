@@ -4,7 +4,7 @@ class Notes extends Api{
   
   async getNotes() {
     try {
-      const response = await this.Api.get("/user/get_notes");
+      const response = await this.Api.get("/api/notes");
       if (response.status >= 200 && response.status < 300) {
         return response.data;
       } else {
@@ -18,7 +18,7 @@ class Notes extends Api{
 
   async addNote(title, content) {
     try {
-      const response = await this.Api.post("/user/add_note",{
+      const response = await this.Api.post("/api/notes",{
         title: title,
         content: content,
       });
@@ -38,7 +38,7 @@ class Notes extends Api{
   async updateNote(note) {
 
     try {
-      const response = await this.Api.post("/user/update_note", {
+      const response = await this.Api.put("/api/notes", {
         _id: note._id,
         title: note.title,
         content: note.content,
@@ -59,12 +59,7 @@ class Notes extends Api{
   async deleteNote(noteId) {
     try {
       console.log(noteId);
-      const response = await this.Api.delete("/user/delete_note", {
-        data: {
-          _id: noteId,
-        },
-      });
-
+      const response = await this.Api.delete(`/api/notes?id=${noteId}`);
       if (response.status == 200) {
         return true;
       } else {

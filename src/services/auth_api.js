@@ -4,7 +4,7 @@ class Auth extends Api{
 
     async login(email, password){
         try{
-            const response = await this.Api.post('/auth/login', {
+            const response = await this.Api.post('/api/login', {
                 email : email,
                 password : password
             });
@@ -23,7 +23,7 @@ class Auth extends Api{
 
     async register(name, email, password){
         try{
-            const response = await this.Api.post('/auth/register', {
+            const response = await this.Api.post('/api/register', {
                 name : name,
                 email : email,
                 password : password
